@@ -18,6 +18,7 @@ factory('btfModal', function ($compile, $rootScope, $controller, $q, $http, $tem
         controller    = config.controller || angular.noop,
         controllerAs  = config.controllerAs,
         container     = angular.element(config.container || document.body),
+        mask          = angular.element('<div class="btf-modal-mask"></div>'),
         element       = null,
         html;
 
@@ -44,6 +45,7 @@ factory('btfModal', function ($compile, $rootScope, $controller, $q, $http, $tem
 
     function attach (html, locals) {
       element = angular.element(html);
+      container.prepend(mask);
       container.prepend(element);
       var scope = $rootScope.$new();
       if (locals) {
@@ -60,6 +62,7 @@ factory('btfModal', function ($compile, $rootScope, $controller, $q, $http, $tem
 
     function deactivate () {
       if (element) {
+        mask.remove();
         element.remove();
         element = null;
       }
