@@ -34,6 +34,8 @@ factory('btfModal', function ($compile, $rootScope, $controller, $q, $http, $tem
         return response.data;
       });
     }
+    
+    mask.on('click', deactivate);
 
     function activate (locals) {
       html.then(function (html) {
